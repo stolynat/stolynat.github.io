@@ -1,0 +1,14 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+#container {
+	position: relative;
+	margin: 0 auto;
+}
+img {
+	width: 210px;
+	height: 140px;
+	position: absolute;
+	border: 1px solid #fffaaa;
+}
