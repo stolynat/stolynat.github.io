@@ -1,8 +1,8 @@
 window.addEventListener('load', init);
 
 function init(){
-	width = 210, 
-	height = 140,
+	width = 210;
+	height = 140;
 	positionImages();
 	activeImage();
 	document.getElementById("rundomize").addEventListener("click", rundomize);
