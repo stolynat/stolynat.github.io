@@ -5,7 +5,23 @@ function init(){
 	height = 140;
 	positionImages();
 	activeImage();
-	document.getElementById("rundomize").addEventListener("click", rundomize);
+	activeImageAddEventListener();
+	/*removeActiveClass();*/
+}
+
+/*function removeActiveClass(){
+	var active = document.getElementsByClassName("active");
+	for (var i=0; i<active.length; i++) {
+		active[i].className = "none";
+		console.log(active[i]);
+	}
+}*/
+
+function activeImageAddEventListener (){
+	var active = document.getElementsByClassName("active");
+	for (var i=0; i<active.length; i++) {
+		active[i].addEventListener("click", replaceImages);
+	}
 }
 
 function positionImages() {
@@ -33,7 +49,7 @@ function positionImages() {
 
 function activeImage() {
 	var images = document.getElementsByTagName("img"),
-	blankImage = document.getElementById("blank");
+		blankImage = document.getElementById("blank");
 	for (var i=0; i<images.length-1; i++){
 		var blankLeft = parseInt(blankImage.style.left);
 		var blankTop = parseInt(blankImage.style.top);
@@ -47,12 +63,18 @@ function activeImage() {
 		}
 	}
 }
-
 function rundomize() {
-	
+	alert("hello");
 }
-
-
-
+function replaceImages() {
+	var clickedImage = this, blankImage = document.getElementById("blank");
+	var tmpTop, tmpLeft;
+	tmpTop = blankImage.style.top;
+	tmpLeft = blankImage.style.left;
+	blankImage.style.top = clickedImage.style.top;
+	blankImage.style.left = clickedImage.style.left;	
+	clickedImage.style.top = tmpTop;
+	clickedImage.style.left = tmpLeft;
+}
 
 
