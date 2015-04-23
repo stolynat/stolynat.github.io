@@ -4,23 +4,13 @@ function init(){
 	width = 210;
 	height = 140;
 	positionImages();
-	activeImage();
-	activeImageAddEventListener();
-	/*removeActiveClass();*/
+	imageAddEventListener();
 }
 
-/*function removeActiveClass(){
-	var active = document.getElementsByClassName("active");
-	for (var i=0; i<active.length; i++) {
-		active[i].className = "none";
-		console.log(active[i]);
-	}
-}*/
-
-function activeImageAddEventListener (){
-	var active = document.getElementsByClassName("active");
-	for (var i=0; i<active.length; i++) {
-		active[i].addEventListener("click", replaceImages);
+function imageAddEventListener (){
+	var images = document.getElementsByTagName("img");
+	for (var i=0; i<images.length; i++) {
+		images[i].addEventListener("click", replaceImages);
 	}
 }
 
@@ -47,34 +37,34 @@ function positionImages() {
 	container.lastChild.id = "blank";
 }
 
-function activeImage() {
-	var images = document.getElementsByTagName("img"),
-		blankImage = document.getElementById("blank");
-	for (var i=0; i<images.length-1; i++){
-		var blankLeft = parseInt(blankImage.style.left);
-		var blankTop = parseInt(blankImage.style.top);
-		var imgLeft = parseInt(images[i].style.left);
-		var imgTop = parseInt(images[i].style.top);
+function activeImage(image) {
+	blankImage = document.getElementById("blank");
+	var blankLeft = parseInt(blankImage.style.left),
+		blankTop = parseInt(blankImage.style.top),
+		imgLeft = parseInt(image.style.left),
+		imgTop = parseInt(image.style.top);
 		if ((blankTop == imgTop && blankLeft == imgLeft + width) || 
 		    (blankLeft == imgLeft && blankTop == imgTop + height) ||
 			(blankTop == imgTop && blankLeft == imgLeft - width) ||
 			(blankLeft == imgLeft && blankTop == imgTop - height)) {
-			images[i].className = "active";
+			return true;
 		}
-	}
 }
+
 function rundomize() {
-	alert("hello");
+	
 }
 function replaceImages() {
 	var clickedImage = this, blankImage = document.getElementById("blank");
-	var tmpTop, tmpLeft;
-	tmpTop = blankImage.style.top;
-	tmpLeft = blankImage.style.left;
-	blankImage.style.top = clickedImage.style.top;
-	blankImage.style.left = clickedImage.style.left;	
-	clickedImage.style.top = tmpTop;
-	clickedImage.style.left = tmpLeft;
+	if (activeImage(clickedImage)){
+		var tmpTop, tmpLeft;
+		tmpTop = blankImage.style.top;
+		tmpLeft = blankImage.style.left;
+		blankImage.style.top = clickedImage.style.top;
+		blankImage.style.left = clickedImage.style.left;	
+		clickedImage.style.top = tmpTop;
+		clickedImage.style.left = tmpLeft;
+	}
 }
 
 
